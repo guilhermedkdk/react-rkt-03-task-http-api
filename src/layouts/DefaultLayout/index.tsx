@@ -11,7 +11,7 @@ export function DefaultLayout() {
       <Header>
         <img src={coverImg} alt="Cover" className="cover" />
 
-        <LogoContainer>
+        <LogoContainer to={"/"}>
           <img src={logoImg} alt="Logo" />
         </LogoContainer>
       </Header>

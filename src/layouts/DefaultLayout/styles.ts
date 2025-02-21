@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const Header = styled.header`
   position: relative;
@@ -19,10 +20,11 @@ export const Header = styled.header`
   }
 `;
 
-export const LogoContainer = styled.div`
+export const LogoContainer = styled(NavLink)`
   position: relative;
 
   transform: translateY(-36px);
+  margin-bottom: 24px;
 `;
 
 export const Main = styled.main`
