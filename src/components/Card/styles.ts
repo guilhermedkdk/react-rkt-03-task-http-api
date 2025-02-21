@@ -63,11 +63,20 @@ export const Header = styled.div`
   }
 
   div {
+    display: flex;
+
     span {
       display: inline-block;
       ::first-letter {
         text-transform: uppercase;
       }
     }
+  }
+`;
+// transform: translateY(50%);
+
+export const Content = styled.div`
+  span {
+    display: flex;
   }
 `;
