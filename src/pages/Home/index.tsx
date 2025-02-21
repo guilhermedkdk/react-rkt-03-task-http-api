@@ -56,6 +56,7 @@ export function Home() {
       />
 
       <Input
+        isHomePage={true}
         placeholder="Buscar conta"
         onChange={(event) => setSearch(event.target.value)}
       />
