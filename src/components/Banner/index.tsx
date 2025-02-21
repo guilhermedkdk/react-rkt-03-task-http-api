@@ -1,10 +1,16 @@
+import { format, formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import { useNavigate } from "react-router-dom";
+
 import {
   ChevronLeft,
   SquareArrowOutUpRight,
   GithubIcon,
   Building,
   Users,
+  CalendarClock,
+  Star,
+  CircleDot,
 } from "lucide-react";
 
 import {
@@ -72,7 +78,7 @@ export function Banner({ home, user, repository }: BannerProps) {
           <button>
             <a target="_blanck" href={user.htmlUrl}>
               <span>Github</span>
-              <SquareArrowOutUpRight />
+              <SquareArrowOutUpRight width={20} />
             </a>
           </button>
         </NavBar>
@@ -104,6 +110,54 @@ export function Banner({ home, user, repository }: BannerProps) {
             </Info>
           </div>
         </Main>
+      </InfoBannerContainer>
+    );
+  }
+
+  if (repository) {
+    const dateFormatted = formatDistanceToNow(new Date(repository.createdAt), {
+      locale: ptBR,
+      addSuffix: true,
+    });
+    const dateTitle = format(new Date(repository.createdAt), "dd/MM/yyyy");
+
+    return (
+      <InfoBannerContainer>
+        <NavBar>
+          <button onClick={handleGoBack}>
+            <ChevronLeft />
+            <span>Voltar</span>
+          </button>
+
+          <button>
+            <a target="_blanck" href={repository.htmlUrl}>
+              <span>Github</span>
+              <SquareArrowOutUpRight width={20} />
+            </a>
+          </button>
+        </NavBar>
+        <Header>
+          <h2>{repository.name}</h2>
+        </Header>
+
+        <p>{repository.description}</p>
+
+        <Info>
+          <div title={dateTitle}>
+            <CalendarClock width={20} />
+            <span>{dateFormatted}</span>
+          </div>
+
+          <div>
+            <Star width={20} />
+            {repository.stargazersCount} Stars
+          </div>
+
+          <div>
+            <CircleDot width={20} />
+            {repository.openIssues} Open Issues
+          </div>
+        </Info>
       </InfoBannerContainer>
     );
   }
