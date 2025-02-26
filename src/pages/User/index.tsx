@@ -50,6 +50,7 @@ export function User() {
       name: data.name,
       login: data.login,
     });
+
     setIsLoadingUserInfo(false);
   }
 
