@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputContainer = styled.input<{ isHomePage?: boolean }>`
+export const InputContainer = styled.input<{ variant?: "user" | "repository" }>`
   width: 100%;
   padding: 0.75rem 1rem;
 
@@ -9,7 +9,16 @@ export const InputContainer = styled.input<{ isHomePage?: boolean }>`
 
   background: ${(props) => props.theme["input"]};
 
-  transform: translateY(${(props) => (props.isHomePage ? "-50%" : "-200%")});
+  transform: translateY(
+    ${
+      (props) =>
+        props.variant === "user"
+          ? "-200%"
+          : props.variant === "repository"
+          ? "0%"
+          : "-50%" // Default value
+    }
+  );
 
   &::placeholder {
     color: ${(props) => props.theme.label};

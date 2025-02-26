@@ -17,12 +17,20 @@ type Repository = {
   openIssues: number;
 };
 
+type Issue = {
+  title: string;
+  createdAt: string;
+  body: string;
+  number: number;
+};
+
 interface CardProps {
   user?: User;
   repository?: Repository;
+  issue?: Issue;
 }
 
-export function Card({ user, repository }: CardProps) {
+export function Card({ user, repository, issue }: CardProps) {
   if (user) {
     return (
       <CardContainer to={user.login}>
@@ -56,6 +64,29 @@ export function Card({ user, repository }: CardProps) {
             <CircleDot />
             {repository.openIssues} Open Issues
           </span>
+        </Content>
+      </CardContainer>
+    );
+  }
+
+  if (issue) {
+    const dateFormatted = formatDistanceToNow(new Date(issue.createdAt), {
+      locale: ptBR,
+      addSuffix: true,
+    });
+    const dateTitle = format(new Date(issue.createdAt), "dd/MM/yyyy");
+
+    return (
+      <CardContainer to={issue.number.toString()}>
+        <Header>
+          <h3>{issue.title}</h3>
+          <div title={dateTitle}>
+            <CalendarClock />
+            <span>{dateFormatted}</span>
+          </div>
+        </Header>
+        <Content>
+          <p>{issue.body}</p>
         </Content>
       </CardContainer>
     );

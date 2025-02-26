@@ -6,7 +6,8 @@ import { Input } from "../../components/Input";
 import { Loading } from "../../components/Loading";
 import { api } from "../../libs/axios";
 
-import { BlogContainer, Cards, Title } from "./styles";
+import { BlogContainer, Title, Cards } from "./styles";
+import { Card } from "../../components/Card";
 
 interface RepositoryInfo {
   name: string;
@@ -32,6 +33,7 @@ export function Repository() {
   const [isLoadingRepositoryInfo, setIsLoadingRepositoryInfo] = useState(true);
   const [issues, setIssues] = useState<Issue[]>([]);
   const [isLoadingIssues, setIsLoadingIssues] = useState(true);
+  const [firstRender, setFirstRender] = useState(true);
 
   async function fetchRepository() {
     const { data } = await api.get(`repos/${user}/${repository}`);
@@ -68,6 +70,19 @@ export function Repository() {
     fetchIssues();
   }, []);
 
+  useEffect(() => {
+    setIsLoadingIssues(true);
+    if (firstRender) {
+      setFirstRender(false);
+    } else {
+      const timeout = setTimeout(async () => {
+        fetchIssues();
+      }, 3000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [search]);
+
   return (
     <BlogContainer>
       {isLoadingRepositoryInfo ? (
@@ -85,8 +100,24 @@ export function Repository() {
 
       <Input
         placeholder="Buscar contéudo"
+        variant="repository"
         onChange={(props) => setSearch(props.target.value)}
       />
+
+      <Cards>
+        {isLoadingIssues ? (
+          <div className="loading">
+            <Loading />
+            <Loading />
+          </div>
+        ) : (
+          <>
+            {issues.map((issue) => (
+              <Card key={issue.number} issue={issue} />
+            ))}
+          </>
+        )}
+      </Cards>
     </BlogContainer>
   );
 }

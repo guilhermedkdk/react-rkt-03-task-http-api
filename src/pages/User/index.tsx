@@ -106,6 +106,7 @@ export function User() {
 
       <Input
         placeholder="Buscar repositório"
+        variant="user"
         onChange={(event) => setSearch(event.target.value)}
       />
 

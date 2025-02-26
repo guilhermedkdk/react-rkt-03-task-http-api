@@ -11,7 +11,7 @@ export const Title = styled.div`
   display: flex;
   justify-content: space-between;
 
-  margin-top: -1rem;
+  margin-top: -5rem;
   margin-bottom: 0.75rem;
 
   h3 {

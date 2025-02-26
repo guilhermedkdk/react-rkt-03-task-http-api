@@ -3,9 +3,9 @@ import { InputHTMLAttributes } from "react";
 import { InputContainer } from "./styles";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  isHomePage?: boolean;
+  variant?: "user" | "repository";
 }
 
-export function Input({ isHomePage, ...props }: InputProps) {
-  return <InputContainer isHomePage={isHomePage} {...props} />;
+export function Input({ variant, ...props }: InputProps) {
+  return <InputContainer variant={variant} {...props} />;
 }
