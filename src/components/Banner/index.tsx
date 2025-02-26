@@ -9,6 +9,8 @@ import {
   Building,
   Users,
   CalendarClock,
+  Calendar,
+  MessageSquare,
   Star,
   CircleDot,
 } from "lucide-react";
@@ -45,13 +47,22 @@ type Repository = {
   openIssues: number;
 };
 
+type Issue = {
+  htmlUrl: string;
+  title: string;
+  userLogin: string;
+  comments: number;
+  createdAt: string;
+};
+
 interface BannerProps {
   home?: Home;
   user?: User;
   repository?: Repository;
+  issue?: Issue;
 }
 
-export function Banner({ home, user, repository }: BannerProps) {
+export function Banner({ home, user, repository, issue }: BannerProps) {
   const navigate = useNavigate();
 
   function handleGoBack() {
@@ -161,4 +172,53 @@ export function Banner({ home, user, repository }: BannerProps) {
       </InfoBannerContainer>
     );
   }
+
+  if (issue) {
+    const dateFormatted = formatDistanceToNow(new Date(issue.createdAt), {
+      locale: ptBR,
+      addSuffix: true,
+    });
+    const dateTitle = format(new Date(issue.createdAt), "dd/MM/yyyy");
+
+    return (
+      <InfoBannerContainer>
+        <NavBar>
+          <button onClick={handleGoBack}>
+            <ChevronLeft />
+            <span>Voltar</span>
+          </button>
+
+          <button>
+            <a target="_blanck" href={issue.htmlUrl}>
+              <span>Github</span>
+              <SquareArrowOutUpRight width={20} />
+            </a>
+          </button>
+        </NavBar>
+
+        <Header>
+          <h2>{issue.title}</h2>
+        </Header>
+
+        <Info>
+          <div>
+            <GithubIcon width={20} />
+            {issue.userLogin}
+          </div>
+
+          <div title={dateTitle}>
+            <Calendar width={20} />
+            <span>{dateFormatted}</span>
+          </div>
+
+          <div>
+            <MessageSquare width={20} />
+            {issue.comments} comentários
+          </div>
+        </Info>
+      </InfoBannerContainer>
+    );
+  }
+
+  return <></>;
 }
