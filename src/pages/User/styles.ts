@@ -10,4 +10,10 @@ export const UserCards = styled(Cards)`
     width: calc(50% - 1rem);
     transform: translateX(0);
   }
+
+  @media (max-width: 900px) {
+    .loading {
+      width: 100%;
+    }
+  }
 `;

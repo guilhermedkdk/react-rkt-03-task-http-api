@@ -45,4 +45,10 @@ export const Cards = styled.div`
       height: 260px;
     }
   }
+
+  @media (max-width: 900px) {
+    .loading {
+      flex-wrap: wrap;
+    }
+  }
 `;

@@ -48,4 +48,9 @@ export const Content = styled.div`
     width: 100%;
     margin-block: 1rem;
   }
+
+  @media (max-width: 900px) {
+    margin-top: -3rem;
+    padding: 0.5rem;
+  }
 `;

@@ -41,6 +41,10 @@ export const CardContainer = styled(NavLink)`
     box-shadow: 0 0 5px ${(props) => props.theme["blue"]};
     border-color: ${(props) => props.theme["label"]};
   }
+
+  @media (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 export const Avatar = styled.img`
@@ -70,6 +74,16 @@ export const Header = styled.div`
       ::first-letter {
         text-transform: uppercase;
       }
+    }
+  }
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: baseline;
+
+    &.home {
+      flex-direction: row;
+      align-items: center;
     }
   }
 `;

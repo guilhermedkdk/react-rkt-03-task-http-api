@@ -16,6 +16,10 @@ export const InfoBannerContainer = styled.div`
   p {
     margin-block: 1rem;
   }
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 export const NavBar = styled.div`
@@ -58,10 +62,18 @@ export const NavBar = styled.div`
       color: ${(props) => props.theme["blue"]};
     }
   }
+
+  @media (max-width: 900px) {
+    margin-bottom: 0.5rem;
+  }
 `;
 
 export const Main = styled.div`
   display: flex;
+
+  @media (max-width: 900px) {
+    /* flex-direction: column; */
+  }
 `;
 
 export const Avatar = styled.img`
@@ -75,6 +87,10 @@ export const Avatar = styled.img`
 export const Header = styled.div`
   display: flex;
   margin-bottom: 1.5rem;
+
+  @media (max-width: 900px) {
+    margin-bottom: 0;
+  }
 `;
 
 export const Info = styled.div`
@@ -87,5 +103,12 @@ export const Info = styled.div`
     gap: 0.5rem;
 
     color: ${(props) => props.theme["span"]};
+  }
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+
+    margin-top: 1rem;
+    gap: 1rem;
   }
 `;
